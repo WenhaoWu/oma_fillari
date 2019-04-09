@@ -29,11 +29,11 @@ class _AppState extends State<App> {
           items: [
             BottomNavigationBarItem(
               title: Text("List"),
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.list),
             ),
             BottomNavigationBarItem(
               title: Text("Map"),
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.map),
             ),
           ],
         ),

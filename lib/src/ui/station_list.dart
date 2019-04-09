@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oma_fillari/src/bloc/station_bloc.dart';
+import 'package:oma_fillari/src/model/station.dart';
 
 class StationList extends StatefulWidget {
   @override
@@ -26,6 +27,29 @@ class StationListState extends State<StationList> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: CircularProgressIndicator());
+    return StreamBuilder(
+      stream: bloc.stations,
+      builder: (context, AsyncSnapshot<List<Station>> snapshot) {
+        if (snapshot.hasData)
+          return buildList(snapshot.data);
+        else if (snapshot.hasError)
+          return Text(snapshot.error.toString());
+        else
+          return Center(child: CircularProgressIndicator());
+      },
+    );
+  }
+
+  Widget buildList(List<Station> data) {
+    return ListView.builder(
+      itemCount: data.length,
+      itemBuilder: (BuildContext context, int index) {
+        return ListTile(
+          title: Text(data[index].name),
+          trailing: Icon(Icons.keyboard_arrow_right),
+          onTap: () {},
+        );
+      },
+    );
   }
 }
