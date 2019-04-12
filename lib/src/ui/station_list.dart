@@ -15,6 +15,7 @@ class StationListState extends State<StationList> {
   @override
   void didChangeDependencies() {
     bloc = StationBlocProvider.of(context);
+    bloc.init();
     bloc.fetchStations();
     super.didChangeDependencies();
   }
@@ -41,15 +42,22 @@ class StationListState extends State<StationList> {
   }
 
   Widget buildList(List<Station> data) {
-    return ListView.builder(
-      itemCount: data.length,
-      itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          title: Text(data[index].name),
-          trailing: Icon(Icons.keyboard_arrow_right),
-          onTap: () {},
-        );
-      },
+    return RefreshIndicator(
+      child: ListView.builder(
+        itemCount: data.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
+            title: Text(data[index].name),
+            trailing: Icon(Icons.keyboard_arrow_right),
+            onTap: () {},
+          );
+        },
+      ),
+      onRefresh: _refreshList,
     );
+  }
+
+  Future<void> _refreshList() {
+    return Future.delayed(Duration(seconds: 1));
   }
 }

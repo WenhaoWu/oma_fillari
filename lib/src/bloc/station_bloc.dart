@@ -27,9 +27,13 @@ class StationBlocProvider extends InheritedWidget {
 
 class StationBloc {
   final _repository = Repository();
-  var _stations = ReplaySubject<List<Station>>();
+  ReplaySubject<List<Station>> _stations;
 
   Stream<List<Station>> get stations => _stations.stream;
+
+  init() {
+    if (_stations == null) _stations = ReplaySubject<List<Station>>();
+  }
 
   fetchStations() async {
     if (_stations.isClosed) return;

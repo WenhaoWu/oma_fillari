@@ -12,6 +12,8 @@ class StationApiProvider {
   Future<List<Station>> fetchStations() async {
     final response = await http.get("$_baseUrl");
 
+    print(response.statusCode);
+
     if (response.statusCode == 200)
       return StationResponse.fromJson(json.decode(response.body)).results;
     else
