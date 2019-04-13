@@ -48,6 +48,7 @@ class StationListState extends State<StationList> {
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             title: Text(data[index].name),
+            subtitle: Text(data[index].disatance.toString()),
             trailing: Icon(Icons.keyboard_arrow_right),
             onTap: () {},
           );

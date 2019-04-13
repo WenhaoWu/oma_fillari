@@ -25,6 +25,8 @@ class Station {
   List<String> networks;
   bool realTimeData;
 
+  double disatance;
+
   Station(
       {this.id,
       this.name,
@@ -52,6 +54,7 @@ class Station {
     state = json['state'];
     networks = json['networks'].cast<String>();
     realTimeData = json['realTimeData'];
+    disatance = 0;
   }
 
   Map<String, dynamic> toJson() {
