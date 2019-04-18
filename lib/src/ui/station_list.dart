@@ -47,8 +47,8 @@ class StationListState extends State<StationList> {
         itemCount: data.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            title: Text(data[index].name),
-            subtitle: Text(data[index].disatance.toString()),
+            title: Text("${data[index].name} (${data[index].bikesAvailable})"),
+            subtitle: Text("${data[index].disatance.round().toString()} m"),
             trailing: Icon(Icons.keyboard_arrow_right),
             onTap: () {},
           );
@@ -59,6 +59,6 @@ class StationListState extends State<StationList> {
   }
 
   Future<void> _refreshList() {
-    return Future.delayed(Duration(seconds: 1));
+    return bloc.fetchStations();
   }
 }

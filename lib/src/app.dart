@@ -1,20 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:oma_fillari/src/bloc/station_bloc.dart';
 import 'package:oma_fillari/src/ui/station_list.dart';
-import 'package:oma_fillari/src/ui/station_map.dart';
 
-class App extends StatefulWidget {
-  @override
-  _AppState createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  int _currentIndex = 0;
-  final List<Widget> _children = [
-    StationBlocProvider(child: StationList()),
-    StationMap(),
-  ];
-
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,28 +11,10 @@ class _AppState extends State<App> {
         appBar: AppBar(
           title: Text("Oma Fillarit"),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: onTabTapped,
-          currentIndex: _currentIndex,
-          items: [
-            BottomNavigationBarItem(
-              title: Text("List"),
-              icon: Icon(Icons.list),
-            ),
-            BottomNavigationBarItem(
-              title: Text("Map"),
-              icon: Icon(Icons.map),
-            ),
-          ],
+        body: SafeArea(
+          child: StationBlocProvider(child: StationList()),
         ),
-        body: SafeArea(child: _children[_currentIndex]),
       ),
     );
-  }
-
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
   }
 }

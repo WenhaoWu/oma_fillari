@@ -49,7 +49,7 @@ class StationBloc {
 
     stations.forEach((s) {
       double distance = absDistance(position, s);
-      s.disatance = distance;
+      s.disatance = distance * 1000000;
     });
 
     stations.sort((s1, s2) => s1.disatance.compareTo(s2.disatance));
